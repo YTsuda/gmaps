@@ -65,4 +65,20 @@ describe("Drawing HTML overlays", function() {
       });
     });
   });
+
+  describe("Allow element content", function() {
+    beforeEach(function() {
+      var el = document.createElement('div');
+      el.innerHTML = 'Lima';
+      overlayWithClick = map_with_overlays.drawOverlay({
+        lat: map_with_overlays.getCenter().lat(),
+        lng: map_with_overlays.getCenter().lng(),
+        content: el,
+      });
+    });
+    it("should add the overlay to the overlays collection", function() {
+      expect(map_with_overlays.overlays.length).toEqual(3);
+      expect(map_with_overlays.overlays[0]).toEqual(overlay);
+    });
+  });
 });
